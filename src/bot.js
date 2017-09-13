@@ -1,8 +1,10 @@
 const Bot = require('./lib/Bot')
 const SOFA = require('sofa-js')
 const Fiat = require('./lib/Fiat')
+const Quote = require('./lib/Quote')
 
 let bot = new Bot()
+let quote = new Quote()
 
 // ROUTING
 
@@ -32,13 +34,13 @@ function onMessage(session, message) {
 
 function onCommand(session, command) {
   switch (command.content.value) {
-    case 'ping':
-      pong(session)
+    case 'qod':
+      quoteOfDay(session)
       break
-    case 'count':
-      count(session)
+     case 'quote':
+      randomQuote(session)
       break
-    case 'donate':
+    case 'tip':
       donate(session)
       break
     }
@@ -69,18 +71,19 @@ function onPayment(session, message) {
 // STATES
 
 function welcome(session) {
-  sendMessage(session, `Hello Token!`)
+  sendMessage(session, `Welcome to InspireBot! Click one of the options below to get started.`)
 }
 
-function pong(session) {
-  sendMessage(session, `Pong`)
+function quoteOfDay(session) {
+  quote.quoteOfDay().then(function(q) {
+    sendMessage(session, q.quote);
+  });
 }
 
-// example of how to store state on each user
-function count(session) {
-  let count = (session.get('count') || 0) + 1
-  session.set('count', count)
-  sendMessage(session, `${count}`)
+function randomQuote(session) {
+  quote.randomQuote().then(function(q) {
+    sendMessage(session, q.quote);
+  });
 }
 
 function donate(session) {
@@ -94,9 +97,9 @@ function donate(session) {
 
 function sendMessage(session, message) {
   let controls = [
-    {type: 'button', label: 'Ping', value: 'ping'},
-    {type: 'button', label: 'Count', value: 'count'},
-    {type: 'button', label: 'Donate', value: 'donate'}
+    {type: 'button', label: 'Quote of Day', value: 'qod'},
+    {type: 'button', label: 'Random Quote', value: 'quote'},
+    {type: 'button', label: 'Tip', value: 'tip'}
   ]
   session.reply(SOFA.Message({
     body: message,
