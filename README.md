@@ -1,6 +1,5 @@
 # toshi-quote-bot
-Daily quote bot for Toshi. You can add it by messaging @InspireBot, or scanning this qrcode on [Toshi](toshi.org):
-
+Daily quote bot for Toshi. You can add it by messaging @InspireBot, or scanning this QR code:
 ![@InspireBot on Toshi](https://github.com/xasos/toshi-quote-bot/raw/master/attachments/qr.png)
 
 ## Running
