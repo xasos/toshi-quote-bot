@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Toshi SOFA App
 
 This repo helps you build a [Toshi app](https://www.toshi.org) in Javascript.
@@ -62,3 +63,7 @@ Deploying a Toshi app requires a few processes to run:
 ## See also
 
 * [https://www.toshi.org]
+=======
+# toshi-quote-bot
+Daily quote bot for Toshi.
+>>>>>>> c415a25871cac325f912ed61f0b23708f16040d8
